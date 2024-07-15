@@ -5,5 +5,5 @@ export default {
     extend: {},
   },
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
-  plugins: [],
+  plugins: [require("tailwind-scrollbar")],
 };

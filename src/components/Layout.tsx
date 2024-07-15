@@ -36,12 +36,119 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
+const people = [
+  {
+    name: "Leslie Alexander",
+    email: "leslie.alexander@example.com",
+    role: "Co-Founder / CEO",
+    imageUrl:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+    lastSeen: "3h ago",
+    lastSeenDateTime: "2023-01-23T13:23Z",
+  },
+  {
+    name: "Michael Foster",
+    email: "michael.foster@example.com",
+    role: "Co-Founder / CTO",
+    imageUrl:
+      "https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+    lastSeen: "3h ago",
+    lastSeenDateTime: "2023-01-23T13:23Z",
+  },
+  {
+    name: "Dries Vincent",
+    email: "dries.vincent@example.com",
+    role: "Business Relations",
+    imageUrl:
+      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+    lastSeen: null,
+  },
+  {
+    name: "Lindsay Walton",
+    email: "lindsay.walton@example.com",
+    role: "Front-end Developer",
+    imageUrl:
+      "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+    lastSeen: "3h ago",
+    lastSeenDateTime: "2023-01-23T13:23Z",
+  },
+  {
+    name: "Courtney Henry",
+    email: "courtney.henry@example.com",
+    role: "Designer",
+    imageUrl:
+      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+    lastSeen: "3h ago",
+    lastSeenDateTime: "2023-01-23T13:23Z",
+  },
+  {
+    name: "Tom Cook",
+    email: "tom.cook@example.com",
+    role: "Director of Product",
+    imageUrl:
+      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+    lastSeen: null,
+  },
+  {
+    name: "Leslie Alexander",
+    email: "leslie.alexander@example.com",
+    role: "Co-Founder / CEO",
+    imageUrl:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+    lastSeen: "3h ago",
+    lastSeenDateTime: "2023-01-23T13:23Z",
+  },
+  {
+    name: "Michael Foster",
+    email: "michael.foster@example.com",
+    role: "Co-Founder / CTO",
+    imageUrl:
+      "https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+    lastSeen: "3h ago",
+    lastSeenDateTime: "2023-01-23T13:23Z",
+  },
+  {
+    name: "Dries Vincent",
+    email: "dries.vincent@example.com",
+    role: "Business Relations",
+    imageUrl:
+      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+    lastSeen: null,
+  },
+  {
+    name: "Lindsay Walton",
+    email: "lindsay.walton@example.com",
+    role: "Front-end Developer",
+    imageUrl:
+      "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+    lastSeen: "3h ago",
+    lastSeenDateTime: "2023-01-23T13:23Z",
+  },
+  {
+    name: "Courtney Henry",
+    email: "courtney.henry@example.com",
+    role: "Designer",
+    imageUrl:
+      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+    lastSeen: "3h ago",
+    lastSeenDateTime: "2023-01-23T13:23Z",
+  },
+  {
+    name: "Tom Cook",
+    email: "tom.cook@example.com",
+    role: "Director of Product",
+    imageUrl:
+      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+    lastSeen: null,
+  },
+];
+
 export default function Example() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
     <>
-      <div>
+      <div className="">
         <Dialog
           open={sidebarOpen}
           onClose={setSidebarOpen}
@@ -72,14 +179,14 @@ export default function Example() {
                   </button>
                 </div>
               </TransitionChild>
-              {/* Sidebar component, swap this element with another sidebar if you like --------------------------------------- MOBILE SIDEBAR --------------------------------------- */}
+              {/* Sidebar component, swap this element with another sidebar if you like --------------------------------------- MOBILE --------------------------------------- */}
 
-              <ContainerBox className="flex grow flex-col gap-y-5 overflow-y-auto px-6 pb-2 rounded-l-none">
+              <ContainerBox className="flex grow flex-col gap-y-5 overflow-y-auto px-6 pb-2 rounded-l-none backdrop-blur-md">
                 <div className="flex h-16 shrink-0 items-center">
                   <img
-                    alt="Your Company"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                    className="h-8 w-auto"
+                    src="/gymBeam.png"
+                    alt=""
+                    className="w-[100px] dark:invert"
                   />
                 </div>
                 <nav className="flex flex-1 flex-col">
@@ -144,6 +251,9 @@ export default function Example() {
                         ))}
                       </ul>
                     </li>
+                    <li className="-mx-6 mt-auto">
+                      <DarkModeToggle className="px-6" />
+                    </li>
                   </ul>
                 </nav>
               </ContainerBox>
@@ -151,7 +261,7 @@ export default function Example() {
           </div>
         </Dialog>
 
-        {/* Static sidebar for desktop */}
+        {/* Static sidebar for desktop ----------------------------------------------------------------------------------------PC----------------*/}
         <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
           {/* Sidebar component, swap this element with another sidebar if you like */}
           <ContainerBox className="flex grow flex-col gap-y-5 overflow-y-auto px-6 rounded-l-none">
@@ -225,18 +335,7 @@ export default function Example() {
                   </ul>
                 </li>
                 <li className="-mx-6 mt-auto">
-                  <a
-                    href="#"
-                    className="flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-50"
-                  >
-                    <img
-                      alt=""
-                      src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                      className="h-8 w-8 rounded-full bg-gray-50"
-                    />
-                    <span className="sr-only">Your profile</span>
-                    <span aria-hidden="true">Tom Cook</span>
-                  </a>
+                  <DarkModeToggle className="px-6" />
                 </li>
               </ul>
             </nav>
@@ -253,18 +352,75 @@ export default function Example() {
             <Bars3Icon aria-hidden="true" className="h-6 w-6" />
           </button>
           <div className="flex-1 text-sm font-semibold leading-6 text-gray-900">
-            Dashboard
+            <a href="">
+              <img
+                src="/gymBeam.png"
+                alt=""
+                className="w-[100px] dark:invert"
+              />
+            </a>
           </div>
           <DarkModeToggle />
         </ContainerBox>
 
-        <div className="lg:pl-72">
-          <div className="p-4 flex gap-4 lg:flex-grow">
-            {/* <div className="px-4 py-10 sm:px-6 lg:px-8 lg:py-6 flex gap-4"> */}
-            <ContainerBox className="w-full">left</ContainerBox>
-            <ContainerBox className="w-full">right</ContainerBox>
-            {/* </div> */}
-          </div>
+        {/* <div className="lg:pl-72 sticky top-0 z-40 flex items-center gap-x-6 px-4 py-4 shadow-sm sm:px-6 lg:hidden rounded-t-none"> */}
+        <div className="lg:pl-72 fixed inset-y-0 lg:z-50 flex flex-col p-4 w-full gap-4">
+          <ContainerBox className="w-full max-w-full mt-[58px] overflow-auto p-0">
+            <div className="scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar dark:scrollbar-thumb-zinc-700/50 scrollbar-thumb-zinc-400/50  scrollbar-track-slate-300/0 h-full overflow-y-scroll p-0">
+              <ul
+                role="list"
+                className="divide-y divide-gray-200 dark:divide-zinc-700"
+              >
+                {people.map((person) => (
+                  <li
+                    key={person.email}
+                    className="flex justify-between gap-x-6 py-5 px-4"
+                  >
+                    <div className="flex min-w-0 gap-x-4">
+                      <img
+                        alt=""
+                        src={person.imageUrl}
+                        className="h-12 w-12 flex-none rounded-full bg-gray-50"
+                      />
+                      <div className="min-w-0 flex-auto">
+                        <p className="text-sm font-semibold leading-6 text-gray-900">
+                          {person.name}
+                        </p>
+                        <p className="mt-1 truncate text-xs leading-5 text-gray-500">
+                          {person.email}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+                      <p className="text-sm leading-6 text-gray-900">
+                        {person.role}
+                      </p>
+                      {person.lastSeen ? (
+                        <p className="mt-1 text-xs leading-5 text-gray-500">
+                          Last seen{" "}
+                          <time dateTime={person.lastSeenDateTime}>
+                            {person.lastSeen}
+                          </time>
+                        </p>
+                      ) : (
+                        <div className="mt-1 flex items-center gap-x-1.5">
+                          <div className="flex-none rounded-full bg-emerald-500/20 p-1">
+                            <div className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                          </div>
+                          <p className="text-xs leading-5 text-gray-500">
+                            Online
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </ContainerBox>
+          <ContainerBox className="w-full mt-auto">
+            <input type="text" />
+          </ContainerBox>
         </div>
       </div>
     </>
