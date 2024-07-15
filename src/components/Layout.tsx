@@ -363,10 +363,9 @@ export default function Example() {
           <DarkModeToggle />
         </ContainerBox>
 
-        {/* <div className="lg:pl-72 sticky top-0 z-40 flex items-center gap-x-6 px-4 py-4 shadow-sm sm:px-6 lg:hidden rounded-t-none"> */}
-        <div className="lg:pl-72 fixed inset-y-0 lg:z-50 flex flex-col p-4 w-full gap-4">
-          <ContainerBox className="w-full max-w-full mt-[58px] overflow-auto p-0">
-            <div className="scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar dark:scrollbar-thumb-zinc-700/50 scrollbar-thumb-zinc-400/50  scrollbar-track-slate-300/0 h-full overflow-y-scroll p-0">
+        <div className="fixed inset-y-0  flex flex-col lg:flex-row p-4 w-full gap-4 lg:pl-72 ">
+          <ContainerBox className="w-full max-w-full mt-[58px] lg:mt-0 overflow-auto p-0 lg:ml-4">
+            <div className="scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar dark:scrollbar-thumb-zinc-700/50 scrollbar-thumb-zinc-400/50  scrollbar-track-slate-300/0 h-full overflow-y-scroll p-0 lg:p-0">
               <ul
                 role="list"
                 className="divide-y divide-gray-200 dark:divide-zinc-700"
@@ -418,7 +417,7 @@ export default function Example() {
               </ul>
             </div>
           </ContainerBox>
-          <ContainerBox className="w-full mt-auto">
+          <ContainerBox className="w-full mt-auto lg:mt-0">
             <input type="text" />
           </ContainerBox>
         </div>
