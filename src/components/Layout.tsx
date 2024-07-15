@@ -17,6 +17,9 @@ import {
 } from "@heroicons/react/24/outline";
 import ContainerBox from "./ContainerBox";
 import DarkModeToggle from "./DarkModeToggle";
+import PlusIcon from "@heroicons/react/24/outline/PlusIcon";
+import CreateTask from "./CreateTask";
+import { create } from "zustand";
 
 const navigation = [
   { name: "Dashboard", href: "#", icon: HomeIcon, current: true },
@@ -145,6 +148,7 @@ const people = [
 
 export default function Example() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [createTask, setCreateTask] = useState(false);
 
   return (
     <>
@@ -181,11 +185,18 @@ export default function Example() {
               </TransitionChild>
               {/* Sidebar component, swap this element with another sidebar if you like --------------------------------------- MOBILE --------------------------------------- */}
 
-              <ContainerBox className="flex grow flex-col gap-y-5 overflow-y-auto px-6 pb-2 rounded-l-none backdrop-blur-md">
+              <ContainerBox
+                className="flex grow flex-col gap-y-5 overflow-y-auto px-6 pb-2
+              rounded-l-none backdrop-blur-md
+            dark:bg-neutral-950
+            dark:bg-[radial-gradient(ellipse_120%_100%_at_20%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]
+            bg-white
+            bg-[radial-gradient(ellipse_120%_100%_at_20%_-20%,rgba(140,140,150,1),rgba(255,255,255,0))]"
+              >
                 <div className="flex h-16 shrink-0 items-center">
                   <img
                     src="/gymBeam.png"
-                    alt=""
+                    alt="logo"
                     className="w-[100px] dark:invert"
                   />
                 </div>
@@ -260,16 +271,21 @@ export default function Example() {
             </DialogPanel>
           </div>
         </Dialog>
-
         {/* Static sidebar for desktop ----------------------------------------------------------------------------------------PC----------------*/}
         <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
           {/* Sidebar component, swap this element with another sidebar if you like */}
-          <ContainerBox className="flex grow flex-col gap-y-5 overflow-y-auto px-6 rounded-l-none">
+          <ContainerBox
+            className="flex grow flex-col gap-y-5 overflow-y-auto px-6 rounded-l-none 
+          dark:bg-neutral-950
+          dark:bg-[radial-gradient(ellipse_120%_100%_at_20%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]
+          bg-white
+          bg-[radial-gradient(ellipse_120%_100%_at_20%_-20%,rgba(140,140,150,1),rgba(255,255,255,0))]"
+          >
             <div className="flex h-16 shrink-0 items-center">
               <img
-                alt="Your Company"
-                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                className="h-8 w-auto"
+                alt="logo"
+                src="/gymBeam.png"
+                className="w-[100px] dark:invert"
               />
             </div>
             <nav className="flex flex-1 flex-col">
@@ -341,7 +357,6 @@ export default function Example() {
             </nav>
           </ContainerBox>
         </div>
-
         <ContainerBox className="sticky top-0 z-40 flex items-center gap-x-6 px-4 py-4 shadow-sm sm:px-6 lg:hidden rounded-t-none">
           <button
             type="button"
@@ -349,7 +364,7 @@ export default function Example() {
             className="-m-2.5 p-2.5 text-gray-700 lg:hidden"
           >
             <span className="sr-only">Open sidebar</span>
-            <Bars3Icon aria-hidden="true" className="h-6 w-6" />
+            <Bars3Icon aria-hidden="true" className="h-6 w-6 text-gray-500" />
           </button>
           <div className="flex-1 text-sm font-semibold leading-6 text-gray-900">
             <a href="">
@@ -362,7 +377,6 @@ export default function Example() {
           </div>
           <DarkModeToggle />
         </ContainerBox>
-
         <div className="fixed inset-y-0  flex flex-col lg:flex-row p-4 w-full gap-4 lg:pl-72 ">
           <ContainerBox className="w-full max-w-full mt-[58px] lg:mt-0 overflow-auto p-0 lg:ml-4">
             <div className="scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar dark:scrollbar-thumb-zinc-700/50 scrollbar-thumb-zinc-400/50  scrollbar-track-slate-300/0 h-full overflow-y-scroll p-0 lg:p-0">
@@ -417,10 +431,40 @@ export default function Example() {
               </ul>
             </div>
           </ContainerBox>
-          <ContainerBox className="w-full mt-auto lg:mt-0">
-            <input type="text" />
+          <ContainerBox className="w-full hidden lg:block auto-cols-max">
+            <CreateTask />
           </ContainerBox>
         </div>
+        {!createTask && !sidebarOpen && (
+          <button
+            type="button"
+            className="lg:hidden m-16 absolute z-50 bottom-0 right-0 rounded-full bg-indigo-600 p-2 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            onClick={() => setCreateTask(true)}
+          >
+            <PlusIcon aria-hidden="true" className="h-10 w-10" />
+          </button>
+        )}
+        {/* //----------------------------------------- dialog ---------------------------------------- */}
+        <Dialog
+          open={createTask}
+          onClose={setCreateTask}
+          className="relative z-50 lg:hidden h-screen"
+        >
+          <DialogBackdrop
+            transition
+            className="fixed inset-0 bg-black/30 transition-opacity duration-300 ease-linear data-[closed]:opacity-0"
+          />
+          <div className="fixed w-full bottom-0">
+            <DialogPanel
+              transition
+              className=" transform transition duration-300 ease-in-out data-[closed]:translate-y-full"
+            >
+              <ContainerBox className="w-full bg-neutral-200 dark:bg-gray-900 rounded-b-none ">
+                <CreateTask />
+              </ContainerBox>
+            </DialogPanel>
+          </div>
+        </Dialog>
       </div>
     </>
   );

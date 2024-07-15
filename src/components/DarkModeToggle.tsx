@@ -1,25 +1,13 @@
-import { useEffect, useState } from "react";
-import { MoonIcon } from "@heroicons/react/24/outline";
-import { SunIcon } from "@heroicons/react/24/outline";
+import { MoonIcon, SunIcon } from "@heroicons/react/24/outline";
 import ButtonAction from "./ButtonAction";
+import { useDarkMode } from "../store/useDarkMode";
 
 interface DarkModeToggleProps {
   className?: string;
 }
 
 const DarkModeToggle = ({ className }: DarkModeToggleProps) => {
-  const [darkMode, setDarkMode] = useState(() => {
-    return localStorage.getItem("darkMode") === "true";
-  });
-
-  useEffect(() => {
-    document.documentElement.classList.toggle("dark", darkMode);
-    localStorage.setItem("darkMode", darkMode.toString());
-  }, [darkMode]);
-
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-  };
+  const { darkMode, toggleDarkMode } = useDarkMode();
 
   return (
     <ButtonAction onClick={toggleDarkMode} className={className}>
