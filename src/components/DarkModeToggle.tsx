@@ -1,4 +1,7 @@
 import { useEffect, useState } from "react";
+import { MoonIcon } from "@heroicons/react/24/outline";
+import { SunIcon } from "@heroicons/react/24/outline";
+import ButtonAction from "./ButtonAction";
 
 const DarkModeToggle = () => {
   const [darkMode, setDarkMode] = useState(() => {
@@ -15,12 +18,13 @@ const DarkModeToggle = () => {
   };
 
   return (
-    <button
-      onClick={toggleDarkMode}
-      className="p-2 text-white bg-blue-500 hover:bg-blue-600"
-    >
-      {darkMode ? "Svetlý režim" : "Tmavý režim"}
-    </button>
+    <ButtonAction onClick={toggleDarkMode} className="">
+      {darkMode ? (
+        <SunIcon className="h-6 w-6 text-gray-500" />
+      ) : (
+        <MoonIcon className="h-6 w-6 text-gray-500" />
+      )}
+    </ButtonAction>
   );
 };
 
