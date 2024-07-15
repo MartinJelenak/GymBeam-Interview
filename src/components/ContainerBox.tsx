@@ -10,11 +10,11 @@ export default function ContainerBox({
   children,
   className,
 }: ContainerBoxProps) {
-  const base = "p-4 ring-1 ring-opacity-5";
-  const light = "bg-gray-300 ring-black ";
-  const dark = "dark:bg-slate-900 dark:ring-slate-700";
+  const base = "p-6 border backdrop-blur-sm rounded-3xl shadow-lg";
+  const light = "bg-black/5 border-black/10 ";
+  const dark = "dark:bg-white/5 dark:border-white/10";
 
-  const combinedStyles = cn(base, light, dark, className);
+  const combinedStyles = cn(base, dark, light, className);
 
   return <div className={combinedStyles}>{children}</div>;
 }
