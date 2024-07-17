@@ -11,7 +11,7 @@ export const updateTodoCompleted = async ({
   todoId: string;
   completed: boolean;
 }): Promise<any> => {
-  const url = `${API_BASE_URL}/todoLists/${todoListId}/todos/${todoId}`;
+  const url = `${API_BASE_URL}/todoList/${todoListId}/todos/${todoId}`;
   const response = await axios.put(url, {
     completed,
   });
@@ -30,7 +30,7 @@ export const createToDo = async ({
   deadline: Date;
 }): Promise<any> => {
   const response = await axios.post(
-    `${API_BASE_URL}/todoLists/${todoListId}/todos`,
+    `${API_BASE_URL}/todoList/${todoListId}/todos`,
     {
       title,
       description,
@@ -49,7 +49,7 @@ export const deleteToDo = async ({
   todoId: string;
 }): Promise<any> => {
   const response = await axios.delete(
-    `${API_BASE_URL}/todoLists/${todoListId}/todos/${todoId}`
+    `${API_BASE_URL}/todoList/${todoListId}/todos/${todoId}`
   );
   return response.data;
 };
@@ -60,24 +60,26 @@ export const fetchToDoLists = async () => {
 };
 
 export const fetchToDoListById = async (id: string) => {
-  const response = await axios.get(`${API_BASE_URL}/todoLists/${id}`);
+  console.log("fetch from api", id, typeof id);
+  const response = await axios.get(`${API_BASE_URL}/todoList/${id}`);
+  console.log("response.data", response);
   return response.data;
 };
 
 export const createToDoList = async ({ name }: { name: string }) => {
-  const response = await axios.post(`${API_BASE_URL}/todoLists`, {
+  const response = await axios.post(`${API_BASE_URL}/todoList`, {
     name,
   });
   return response.data;
 };
 
 export const deleteToDoList = async (id: string) => {
-  const response = await axios.delete(`${API_BASE_URL}/todoLists/${id}`);
+  const response = await axios.delete(`${API_BASE_URL}/todoList/${id}`);
   return response.data;
 };
 
 export const updateToDoList = async (id: string, name: string) => {
-  const response = await axios.put(`${API_BASE_URL}/todoLists/${id}`, {
+  const response = await axios.put(`${API_BASE_URL}/todoList/${id}`, {
     name,
   });
   return response.data;

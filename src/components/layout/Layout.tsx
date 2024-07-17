@@ -1,11 +1,12 @@
-import DesctopSideBar from "./layout/DesctopSideBar";
-import MobilHeader from "./layout/MobilHeader";
-import MobileSideBar from "./layout/MobileSideBar";
-import TodoList from "./layout/TodoList";
-import { ToDoListType } from "../types";
+import DesctopSideBar from "./DesctopSideBar";
+import MobilHeader from "./MobilHeader";
+import MobileSideBar from "./MobileSideBar";
+import TodoList from "./TodoList";
+import { ToDoListType } from "../../types";
 import { Routes, Route } from "react-router-dom";
-import ToDoItemC from "./ToDoItemC";
+import ToDoItemC from "../ToDoItemC";
 import ToDoItemLayout from "./ToDoItemLayout";
+import CreateTaskModal from "../CreateTaskModal";
 
 export default function Layout({ data }: { data: ToDoListType[] }) {
   return (
@@ -22,6 +23,7 @@ export default function Layout({ data }: { data: ToDoListType[] }) {
           <Route path="/list/:todoId" element={<ToDoItemC />} />
         </Routes>
       </ToDoItemLayout>
+      <CreateTaskModal />
     </>
   );
 }

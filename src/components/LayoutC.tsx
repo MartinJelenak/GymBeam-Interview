@@ -1,14 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import { fetchToDoLists } from "../api/api";
-import Layout from "./Layout";
+import Layout from "./layout/Layout";
 
 export default function LayoutC() {
   const { data, isLoading, error } = useQuery({
-    queryKey: ["courses"],
+    queryKey: ["ToDoLists"],
     queryFn: fetchToDoLists,
   });
 
-  console.log(data);
+  if (error) return <div>Error loading todos.</div>;
   if (isLoading) return <div>Loading...</div>;
 
   return (
