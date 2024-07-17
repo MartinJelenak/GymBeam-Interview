@@ -9,6 +9,8 @@ interface TodoListProps {
   initializeToDoItemFromData: () => void;
   toDoListItem: ToDoListType;
   setToDoListItem: (todoListItem: ToDoListType) => void;
+  ListParamsId: string;
+  setListParamsId: (id: string) => void;
 }
 
 export const useTodoList = create<TodoListProps>((set, get) => ({
@@ -18,14 +20,17 @@ export const useTodoList = create<TodoListProps>((set, get) => ({
     name: "",
     todos: [],
   },
+  ListParamsId: "1",
   setToDoListItem: (todoListItem: ToDoListType) =>
     set({ toDoListItem: todoListItem }),
   toDoItem: {
     title: "",
-    description: "",
     completed: false,
     id: "0",
-    todolistId: "0",
+    todoListId: "0",
+    deadLine: "",
+    createdAt: "",
+    tags: [],
   },
   setData: (data: ToDoListType[]) => {
     set({ data });
@@ -40,4 +45,5 @@ export const useTodoList = create<TodoListProps>((set, get) => ({
       set({ toDoItem: data[0].todos[0] });
     }
   },
+  setListParamsId: (id: string) => set({ ListParamsId: id }),
 }));

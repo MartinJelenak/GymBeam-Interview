@@ -3,11 +3,14 @@ import { Bars3Icon } from "@heroicons/react/24/outline";
 import ContainerBox from "../ContainerBox";
 import DarkModeToggle from "../DarkModeToggle";
 import { useModal } from "../../store/useModalStore";
+import { FunnelIcon } from "@heroicons/react/24/outline";
+import ButtonAction from "../ButtonAction";
 
 export default function MobilHeader() {
-  const { openSideBar } = useModal();
+  const { openSideBar, openFilter } = useModal();
+
   return (
-    <ContainerBox className="sticky top-0 z-40 flex items-center gap-x-6 px-4 py-4 shadow-sm sm:px-6 lg:hidden rounded-t-none">
+    <ContainerBox className="fixed w-full top-0 z-40 flex items-center gap-x-6 px-4 py-4 shadow-sm sm:px-6 lg:hidden rounded-t-none">
       <button
         type="button"
         onClick={openSideBar}
@@ -21,7 +24,10 @@ export default function MobilHeader() {
           <img src="/gymBeam.png" alt="" className="w-[100px] dark:invert" />
         </a>
       </div>
-      <DarkModeToggle />
+      <ButtonAction onClick={openFilter}>
+        <FunnelIcon className="h-6 w-6 text-gray-500" />
+      </ButtonAction>
+      {/* <DarkModeToggle /> */}
     </ContainerBox>
   );
 }

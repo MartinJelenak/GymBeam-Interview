@@ -3,6 +3,10 @@ import { ToDoItemType } from "../types";
 import { TrashIcon } from "@heroicons/react/24/outline";
 // import updateTodoCompleted from "../api/api";
 import ContainerBox from "./ContainerBox";
+import { ChevronDownIcon } from "@heroicons/react/24/outline";
+
+import { ChevronDoubleUpIcon } from "@heroicons/react/24/outline";
+import { ChevronUpIcon } from "@heroicons/react/24/outline";
 
 interface ToDoItemProps {
   itemData: ToDoItemType;
@@ -11,38 +15,34 @@ interface ToDoItemProps {
     todoId: string,
     completed: boolean
   ) => void;
+  handleDeleteToDo: (todoListId: string, todoId: string) => void;
 }
 
 export default function ToDoItem({
   itemData,
   handleCompleteToDo,
+  handleDeleteToDo,
 }: ToDoItemProps) {
-  const { id, title, description, completed, todolistId } = itemData;
+  const {
+    id,
+    title,
+    completed,
+    todoListId,
+    deadLine,
+    createdAt,
+    tags,
+    priority,
+  } = itemData;
+  console.log(todoListId);
 
   return (
-    <ContainerBox className="p-0 mb-4">
-      <div className=" bg-opacity-10 rounded-xl p-4 mb-2 ">
+    <ContainerBox className="p-0 mb-4 rounded-xl">
+      <div className=" bg-opacity-10 p-2 px-2 ">
         <fieldset>
           <legend className="sr-only">Notifications</legend>
           <div className="space-y-5 ">
-            <div className="relative flex items-start">
-              <div className="flex h-6 items-center">
-                <style>
-                  {`
-                            .custom-checkbox {
-                                /* Přidejte styly pro šedé pozadí a okraj */
-                                background-color: #132938; /* šedá barva pozadí (např. gray-100 z Tailwind) */
-                                border-color: #4F4F4F; /* šedý okraj (např. gray-300 z Tailwind) */
-                              }
-                              
-                              /* Styly pro zaškrtnutý stav */
-                              .custom-checkbox:checked {
-                                /* Modré pozadí a okraj pro zaškrtnutý stav */
-                                background-color: #2563eb; /* modrá (blue-600) */
-                                border-color: #1d4ed8; /* tmavě modrá (blue-700) */
-                              }
-                        `}
-                </style>
+            <div className="relative flex">
+              <div className="flex flex-col w-[20px] justify-between items-center">
                 <input
                   id={`todo-item-${id}`}
                   aria-describedby={`todo-item-desc-${id}`}
@@ -51,29 +51,49 @@ export default function ToDoItem({
                   className="h-4 w-4 rounded custom-checkbox "
                   checked={completed}
                   onChange={() =>
-                    handleCompleteToDo(todolistId, id, !completed)
+                    handleCompleteToDo(todoListId, id, !completed)
                   }
                 />
+                {priority === "high" ? (
+                  <div>
+                    <ChevronDoubleUpIcon className="h-5 w-5 text-red-400" />
+                  </div>
+                ) : priority === "medium" ? (
+                  <div>
+                    <ChevronUpIcon className="h-5 w-5 text-orange-400" />
+                  </div>
+                ) : (
+                  <> </>
+                )}
               </div>
               <div className="ml-3 text-sm leading-6 w-full">
-                <div>
+                <div className="flex flex-col">
                   <div className="flex justify-between">
-                    <label htmlFor="comments" className="font-medium ">
-                      {title}
-                    </label>
+                    <span>{title}</span>
                     <button
                       type="button"
                       className="inline-flex rounded-md  "
-                      // onClick={handleDelete}
+                      onClick={() => handleDeleteToDo(todoListId, id)}
                     >
                       <span className="sr-only">Close</span>
                       <TrashIcon className="h-5 w-5  hover:text-gray-800 focus:text-gray-200" />
                     </button>
                   </div>
+                  <div>
+                    {tags.map(
+                      (tag, index) =>
+                        index < 3 && (
+                          <span
+                            key={index}
+                            className="text-xs text-gray-400 loadinf mr-2"
+                          >
+                            {tag}
+                          </span>
+                        )
+                    )}
+                  </div>
                 </div>
-                <p id="comments-description" className="">
-                  {description}
-                </p>
+                <p id="comments-description" className=""></p>
               </div>
             </div>
           </div>

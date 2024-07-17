@@ -1,18 +1,24 @@
 import ContainerBox from "../ContainerBox";
-import CreateTask from "../CreateTask";
+import CreateTaskC from "../CreateTaskC";
+import Filter from "../Filter";
 export default function ToDoItemLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <div className="fixed inset-y-0  flex flex-col lg:flex-row p-4 w-full gap-4 lg:pl-72 ">
-      <div className="w-full max-w-full mt-[58px] lg:mt-0 overflow-auto p-0 lg:ml-4">
+    <div className=" flex flex-col lg:flex-row p-4 w-full gap-4 lg:pl-72 text-black dark:text-white">
+      <div className="w-full max-w-full lg:mt-0 p-0 mt-[58px] lg:ml-4">
         {children}
       </div>
-      <ContainerBox className="w-full hidden lg:block auto-cols-max">
-        <CreateTask />
-      </ContainerBox>
+      <div className="relative w-full flex flex-col gap-4">
+        <ContainerBox className="sticky right-0 w-full hidden lg:block auto-cols-max">
+          <Filter />
+        </ContainerBox>
+        <ContainerBox className="sticky right-0 w-full hidden lg:block auto-cols-max">
+          <CreateTaskC />
+        </ContainerBox>
+      </div>
     </div>
   );
 }

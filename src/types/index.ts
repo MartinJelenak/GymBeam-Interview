@@ -1,12 +1,12 @@
 export interface ToDoItemType {
   id: string;
   title: string;
-  description: string;
   completed: boolean;
-  todolistId: string;
+  todoListId: string;
   deadLine: string;
   createdAt: string;
   tags: string[];
+  priority: ToDoPriority;
 }
 
 export interface ToDoListType {

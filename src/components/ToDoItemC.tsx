@@ -1,13 +1,20 @@
 import ToDoItem from "./ToDoItem";
 import { ToDoItemType } from "../types";
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { updateTodoCompleted, fetchToDoListById } from "../api/api";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { updateTodoCompleted, fetchToDoListById, deleteToDo } from "../api/api";
 import { useParams } from "react-router-dom";
+import { useEffect } from "react";
+import { useTodoList } from "../store/dataStore";
 
 export default function ToDoItemC() {
   const { todoId } = useParams<{ todoId: string }>();
+  const setListParamsId = useTodoList((state) => state.setListParamsId);
+  const queryClient = useQueryClient();
   // const todoId = "2"; // For illustration, assuming this ID is correct
-  console.log("todoId", todoId, typeof todoId);
+  // console.log("todoId", todoId, typeof todoId);
+  useEffect(() => {
+    setListParamsId(todoId!);
+  }, [todoId]);
 
   const {
     data: todos,
@@ -28,7 +35,7 @@ export default function ToDoItemC() {
       completed: boolean;
     }) => updateTodoCompleted(data),
     onSuccess: () => {
-      console.log("Todo completion status updated successfully");
+      queryClient.invalidateQueries({ queryKey: ["todos"] });
     },
   });
 
@@ -38,6 +45,19 @@ export default function ToDoItemC() {
     completed: boolean
   ) => {
     mutationTodoComplete.mutate({ todoListId, todoId, completed });
+  };
+
+  const mutationDeleteToDo = useMutation({
+    mutationFn: (data: { todoListId: string; todoId: string }) =>
+      deleteToDo(data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["todos"] });
+    },
+  });
+
+  const handleDeleteToDo = (todoListId: string, todoId: string) => {
+    console.log(todoListId, todoId);
+    mutationDeleteToDo.mutate({ todoListId, todoId });
   };
 
   if (todosLoading) {
@@ -52,15 +72,16 @@ export default function ToDoItemC() {
     return <div>No items found.</div>;
   }
 
+  //todo filter
+  console.log("todos.todos", todos.todos);
   return (
     <>
       {todos.todos.map((item: ToDoItemType) => (
         <div key={item.id}>
           <ToDoItem
             itemData={item}
-            handleCompleteToDo={() =>
-              handleCompleteToDo(todoId!, item.id, !item.completed)
-            }
+            handleCompleteToDo={handleCompleteToDo}
+            handleDeleteToDo={handleDeleteToDo}
           />
         </div>
       ))}

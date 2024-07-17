@@ -1,19 +1,20 @@
 "use client";
-import { useTodoList } from "../../store/dataStore";
 import { useModal } from "../../store/useModalStore";
 import { ToDoListType } from "../../types";
 import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 export default function TodoList({ data }: { data: ToDoListType[] }) {
-  const setToDoListItem = useTodoList((state) => state.setToDoListItem);
   const closeSideBar = useModal((state) => state.closeSideBar);
   const navigate = useNavigate();
+  const { todoId } = useParams<{ todoId: string }>();
 
   function handleClick(item: ToDoListType) {
-    setToDoListItem(item);
     closeSideBar();
     navigate(`/list/${item.id}`);
   }
+
+  console.log("todoId", todoId, typeof todoId);
 
   return (
     <div className="flex flex-col items-start">

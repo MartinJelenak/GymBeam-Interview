@@ -43,11 +43,11 @@ export default function SideBar({ children }: { children: React.ReactNode }) {
 
           <ContainerBox
             className="flex grow flex-col gap-y-5 overflow-y-auto px-6 pb-2
-                  rounded-l-none backdrop-blur-md
-                  dark:bg-neutral-950
-                  dark:bg-[radial-gradient(ellipse_120%_100%_at_20%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]
-                  bg-white
-                  bg-[radial-gradient(ellipse_120%_100%_at_20%_-20%,rgba(140,140,150,1),rgba(255,255,255,0))]"
+                  rounded-l-none 
+                  dark:bg-gray-700
+                  bg-gray-200
+                  text-gray-800
+                  dark:text-gray-200"
           >
             <div className="flex h-16 shrink-0 items-center">
               <img

@@ -7,6 +7,7 @@ import { Routes, Route } from "react-router-dom";
 import ToDoItemC from "../ToDoItemC";
 import ToDoItemLayout from "./ToDoItemLayout";
 import CreateTaskModal from "../CreateTaskModal";
+import FilterTaskModal from "../FilterTaskModal";
 
 export default function Layout({ data }: { data: ToDoListType[] }) {
   return (
@@ -24,6 +25,7 @@ export default function Layout({ data }: { data: ToDoListType[] }) {
         </Routes>
       </ToDoItemLayout>
       <CreateTaskModal />
+      <FilterTaskModal />
     </>
   );
 }

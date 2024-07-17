@@ -21,21 +21,24 @@ export const updateTodoCompleted = async ({
 export const createToDo = async ({
   todoListId,
   title,
-  description,
-  deadline,
+  deadLine,
+  tags,
+  priority,
 }: {
   todoListId: string;
   title: string;
-  description: string;
-  deadline: Date;
+  deadLine: String;
+  tags: string[];
+  priority: string;
 }): Promise<any> => {
   const response = await axios.post(
     `${API_BASE_URL}/todoList/${todoListId}/todos`,
     {
       title,
-      description,
-      deadline,
+      deadLine,
       completed: false,
+      tags,
+      priority,
     }
   );
   return response.data;
