@@ -5,7 +5,7 @@
 /* v index.css */
 body {
   background-color: white;
-  overflow: hidden;
+  overflow: scroll;
 }
 
 @media (prefers-color-scheme: dark) {
