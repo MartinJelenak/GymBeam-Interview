@@ -9,7 +9,7 @@ export default function CreateListC() {
   const mutationCreateList = useMutation({
     mutationFn: createToDoList,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["todos"] });
+      queryClient.invalidateQueries({ queryKey: ["ToDoLists"] });
     },
   });
 

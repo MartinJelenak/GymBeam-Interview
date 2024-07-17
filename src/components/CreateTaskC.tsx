@@ -10,7 +10,7 @@ export default function TodoItemContainer() {
   const mutationCreateToDo = useMutation({
     mutationFn: createToDo,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["todos"] });
+      queryClient.invalidateQueries({ queryKey: ["ToDoLists"] });
     },
   });
 

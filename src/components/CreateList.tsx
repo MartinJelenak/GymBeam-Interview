@@ -20,7 +20,7 @@ export default function CreateList({
 
   return (
     // 🐨 add a formik form here
-    <form onSubmit={formik.handleSubmit}>
+    <form onSubmit={formik.handleSubmit} className="sticky">
       <div className="mt-2 px-3">
         <input
           id="listName"

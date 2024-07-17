@@ -4,11 +4,14 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { updateTodoCompleted, fetchToDoListById, deleteToDo } from "../api/api";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
-import { useTodoList } from "../store/dataStore";
+import { useTodoList, setToDoItem } from "../store/dataStore";
+import { useModal } from "../store/useModalStore";
 
 export default function ToDoItemC() {
   const { todoId } = useParams<{ todoId: string }>();
   const setListParamsId = useTodoList((state) => state.setListParamsId);
+  const setToDoItem = useTodoList((state) => state.setToDoItem);
+  const openCreateTask = useModal((state) => state.openCreateTask);
   const queryClient = useQueryClient();
   // const todoId = "2"; // For illustration, assuming this ID is correct
   // console.log("todoId", todoId, typeof todoId);
@@ -72,6 +75,11 @@ export default function ToDoItemC() {
     return <div>No items found.</div>;
   }
 
+  const editButtonHanler = (item: ToDoItemType) => {
+    setToDoItem(item);
+    openCreateTask();
+  };
+
   //todo filter
   console.log("todos.todos", todos.todos);
   return (
@@ -82,6 +90,7 @@ export default function ToDoItemC() {
             itemData={item}
             handleCompleteToDo={handleCompleteToDo}
             handleDeleteToDo={handleDeleteToDo}
+            editButtonHanler={editButtonHanler}
           />
         </div>
       ))}

@@ -16,12 +16,14 @@ interface ToDoItemProps {
     completed: boolean
   ) => void;
   handleDeleteToDo: (todoListId: string, todoId: string) => void;
+  editButtonHanler: (itemData: ToDoItemType) => void;
 }
 
 export default function ToDoItem({
   itemData,
   handleCompleteToDo,
   handleDeleteToDo,
+  editButtonHanler,
 }: ToDoItemProps) {
   const {
     id,
@@ -79,18 +81,28 @@ export default function ToDoItem({
                       <TrashIcon className="h-5 w-5  hover:text-gray-800 focus:text-gray-200" />
                     </button>
                   </div>
-                  <div>
-                    {tags.map(
-                      (tag, index) =>
-                        index < 3 && (
-                          <span
-                            key={index}
-                            className="text-xs text-gray-400 loadinf mr-2"
-                          >
-                            {tag}
-                          </span>
-                        )
-                    )}
+                  <div className="flex justify-between">
+                    <div>
+                      {tags.map(
+                        (tag, index) =>
+                          index < 3 && (
+                            <span
+                              key={index}
+                              className="text-xs text-gray-400 loadinf mr-2"
+                            >
+                              {tag}
+                            </span>
+                          )
+                      )}
+                    </div>
+                    <button
+                      type="button"
+                      className="rounded-md  flex items-end"
+                      onClick={() => editButtonHanler(itemData)}
+                    >
+                      <span className="sr-only">Close</span>
+                      <TrashIcon className="h-5 w-5  hover:text-gray-800 focus:text-gray-200" />
+                    </button>
                   </div>
                 </div>
                 <p id="comments-description" className=""></p>
