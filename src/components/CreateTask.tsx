@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useFormik } from "formik";
 import { formatISO } from "date-fns";
 import ButtonAction from "./ButtonAction";
-import { createToDoValidationSchema } from "../schemas/CreateToDoValidationSchema";
 import ButtonsFilter from "./ButtonsFilter";
 import { useTodoList } from "../store/dataStore";
 
@@ -68,7 +67,6 @@ export default function CreateTask({
       tags: editItemData ? toDoItem.tags : [],
       priority: editItemData ? toDoItem.priority : "none",
     },
-    validationSchema: createToDoValidationSchema,
     onSubmit: (values) => {
       if (editItemData) {
         handleEditToDo(
