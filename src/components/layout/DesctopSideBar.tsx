@@ -23,7 +23,7 @@ export default function DesctopSideBar({ children }: SidebarItemProps) {
             className="w-[100px] dark:invert"
           />
         </div>
-        <div className="-mx-6 mt-auto bg-gray-200 ">
+        <div className="-mx-6 mt-auto bg-gray-200 dark:bg-gray-700 ">
           <DarkModeToggle className="px-6 right-0" />
           <CreateListC />
         </div>

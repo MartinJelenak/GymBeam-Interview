@@ -22,7 +22,7 @@ export default function TodoList({ data }: { data: ToDoListType[] }) {
         <button
           key={item.id}
           onClick={() => handleClick(item)}
-          className="w-full rounded-lg mb-2 bg-gray-200"
+          className="w-full rounded-lg mb-2 bg-gray-200 dark:bg-gray-600/50 p-1 px-4 hower:bg-gray-300 dark:hover:bg-gray-600"
         >
           <div className="flex justify-between">
             <div>{item.name}</div>

@@ -8,6 +8,7 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 import ContainerBox from "../ContainerBox";
 import DarkModeToggle from "../DarkModeToggle";
 import { useModal } from "../../store/useModalStore";
+import CreateListC from "../CreateListC";
 
 export default function SideBar({ children }: { children: React.ReactNode }) {
   const { isOpenSideBar, closeSideBar } = useModal();
@@ -56,15 +57,16 @@ export default function SideBar({ children }: { children: React.ReactNode }) {
                 className="w-[100px] dark:invert"
               />
             </div>
+            <div className="-mx-6 mt-auto bg-gray-200 dark:bg-gray-700">
+              <DarkModeToggle className="px-6 right-0" />
+              <CreateListC />
+            </div>
             <nav className="flex flex-1 flex-col">
               <ul role="list" className="flex flex-1 flex-col gap-y-7">
                 <li>
                   <ul role="list" className="-mx-2 space-y-1">
                     {children}
                   </ul>
-                </li>
-                <li className="-mx-6 mt-auto">
-                  <DarkModeToggle className="px-6" />
                 </li>
               </ul>
             </nav>

@@ -1,7 +1,12 @@
 import ToDoItem from "./ToDoItem";
 import { ToDoItemType } from "../types";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { updateTodoCompleted, fetchToDoListById, deleteToDo } from "../api/api";
+import {
+  updateTodoCompleted,
+  fetchToDoListById,
+  deleteToDo,
+  updateToDoItem,
+} from "../api/api";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useTodoList, setToDoItem } from "../store/dataStore";
@@ -12,6 +17,7 @@ export default function ToDoItemC() {
   const setListParamsId = useTodoList((state) => state.setListParamsId);
   const setToDoItem = useTodoList((state) => state.setToDoItem);
   const openCreateTask = useModal((state) => state.openCreateTask);
+  const setEditItemData = useTodoList((state) => state.setEditItemData);
   const queryClient = useQueryClient();
   // const todoId = "2"; // For illustration, assuming this ID is correct
   // console.log("todoId", todoId, typeof todoId);
@@ -78,6 +84,7 @@ export default function ToDoItemC() {
   const editButtonHanler = (item: ToDoItemType) => {
     setToDoItem(item);
     openCreateTask();
+    setEditItemData(true);
   };
 
   //todo filter

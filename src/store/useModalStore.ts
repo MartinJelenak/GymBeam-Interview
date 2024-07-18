@@ -1,4 +1,5 @@
-import { create } from "zustand";
+import create from "zustand";
+import { useTodoList } from "./dataStore";
 
 interface ModalState {
   isOpenSideBar: boolean;
@@ -20,7 +21,11 @@ export const useModal = create<ModalState>((set) => ({
   openSideBar: () => set({ isOpenSideBar: true }),
   closeSideBar: () => set({ isOpenSideBar: false }),
   openCreateTask: () => set({ isOpenCreateTask: true }),
-  closeCreateTask: () => set({ isOpenCreateTask: false }),
+  closeCreateTask: () => {
+    set({ isOpenCreateTask: false });
+    const setEditItemData = useTodoList.getState().setEditItemData;
+    setEditItemData(false); // Vyvolanie zmeny v useTodoList store
+  },
   openFilter: () => set({ isOpenFilter: true }),
   closeFilter: () => set({ isOpenFilter: false }),
 }));

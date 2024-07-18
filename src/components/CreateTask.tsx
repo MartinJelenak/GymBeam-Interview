@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useFormik } from "formik";
 import { formatISO } from "date-fns";
 import ButtonAction from "./ButtonAction";
 import { createToDoValidationSchema } from "../schemas/CreateToDoValidationSchema";
 // import ButtonAction from "./ButtonAction";
 import ButtonsFilter from "./ButtonsFilter";
+import { useTodoList } from "../store/dataStore";
 
 interface CreateTaskProps {
   handleCreateToDo(
@@ -15,19 +16,40 @@ interface CreateTaskProps {
     priority: string
   ): void;
   todoListId: string;
+  handleEditToDo: (
+    todoListId: string,
+    todoId: string,
+    title: string,
+    deadLine: Date,
+    tags: string[],
+    priority: string
+  ) => void;
 }
 
 export default function CreateTask({
   handleCreateToDo,
   todoListId,
+  handleEditToDo,
 }: CreateTaskProps) {
+  const editItemData = useTodoList((state) => state.editItemData);
+  const toDoItem = useTodoList((state) => state.toDoItem);
+
+  console.log("premenne", editItemData, toDoItem);
+
   const [activeButton, setActiveButton] = useState<
     "none" | "low" | "medium" | "high"
   >("none");
 
   const handleButtonClick = (level: "none" | "low" | "medium" | "high") => {
     setActiveButton(level);
+    formik.setFieldValue("priority", level);
   };
+
+  useEffect(() => {
+    if (editItemData) {
+      setActiveButton(toDoItem.priority);
+    }
+  }, [editItemData]);
 
   const handleTagsChange = (event: any) => {
     const { value } = event.target;
@@ -39,21 +61,34 @@ export default function CreateTask({
 
   const formik = useFormik({
     initialValues: {
-      title: "",
-      deadLine: new Date().toISOString(),
-      tags: [],
-      priority: activeButton,
+      title: editItemData ? toDoItem.title : "",
+      deadLine: editItemData
+        ? formatISO(new Date(toDoItem.deadLine))
+        : new Date().toISOString(),
+      tags: editItemData ? toDoItem.tags : [],
+      priority: editItemData ? toDoItem.priority : "none",
     },
-    // validationSchema: createToDoValidationSchema,
     onSubmit: (values) => {
-      console.log("Odosielanie:", values.deadLine);
-      handleCreateToDo(
-        todoListId,
-        values.title,
-        new Date(values.deadLine),
-        values.tags, // Assuming tags are entered comma-separated
-        activeButton
-      );
+      if (editItemData) {
+        // Volanie funkcie na úpravu existujúcej úlohy
+        handleEditToDo(
+          todoListId,
+          toDoItem.id, // Pridáme ID úlohy
+          values.title,
+          new Date(values.deadLine),
+          values.tags,
+          values.priority
+        );
+      } else {
+        // Volanie funkcie na vytvorenie novej úlohy
+        handleCreateToDo(
+          todoListId,
+          values.title,
+          new Date(values.deadLine),
+          values.tags,
+          values.priority
+        );
+      }
     },
   });
 
@@ -121,7 +156,7 @@ export default function CreateTask({
             </ButtonsFilter>
           </div>
           <ButtonAction className="mt-4 w-full" type="submit" variant="primary">
-            Add Task
+            {editItemData ? "Update Task" : "Add Task"}
           </ButtonAction>
         </div>
       </form>

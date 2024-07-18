@@ -57,6 +57,33 @@ export const deleteToDo = async ({
   return response.data;
 };
 
+export const updateToDoItem = async ({
+  todoListId,
+  todoId,
+  title,
+  deadLine,
+  tags,
+  priority,
+}: {
+  todoListId: string;
+  todoId: string;
+  title: string;
+  deadLine: Date;
+  tags: string[];
+  priority: string;
+}): Promise<any> => {
+  const response = await axios.put(
+    `${API_BASE_URL}/todoList/${todoListId}/todos/${todoId}`,
+    {
+      title,
+      deadLine,
+      tags,
+      priority,
+    }
+  );
+  return response.data;
+};
+
 export const fetchToDoLists = async () => {
   const response = await axios.get(`${API_BASE_URL}/todoList`);
   return response.data;

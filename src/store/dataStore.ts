@@ -11,6 +11,8 @@ interface TodoListProps {
   setToDoListItem: (todoListItem: ToDoListType) => void;
   ListParamsId: string;
   setListParamsId: (id: string) => void;
+  editItemData: boolean;
+  setEditItemData: (editItemData: boolean) => void;
 }
 
 export const useTodoList = create<TodoListProps>((set, get) => ({
@@ -46,4 +48,6 @@ export const useTodoList = create<TodoListProps>((set, get) => ({
     }
   },
   setListParamsId: (id: string) => set({ ListParamsId: id }),
+  editItemData: false,
+  setEditItemData: (editItemData: boolean) => set({ editItemData }),
 }));
