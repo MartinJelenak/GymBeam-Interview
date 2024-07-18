@@ -40,7 +40,6 @@ export default function SideBar({ children }: { children: React.ReactNode }) {
               </button>
             </div>
           </TransitionChild>
-          {/* Sidebar component, swap this element with another sidebar if you like --------------------------------------- MOBILE --------------------------------------- */}
 
           <ContainerBox
             className="flex grow flex-col gap-y-5 overflow-y-auto px-6 pb-2

@@ -1,7 +1,6 @@
 import { useModal } from "../store/useModalStore";
 import { Dialog, DialogBackdrop, DialogPanel } from "@headlessui/react";
 import PlusIcon from "@heroicons/react/24/outline/PlusIcon";
-import ContainerBox from "./ContainerBox";
 import CreateTaskC from "./CreateTaskC";
 
 export default function CreateTaskModal() {

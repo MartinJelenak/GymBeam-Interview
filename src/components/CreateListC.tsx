@@ -1,7 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createToDoList } from "../api/api";
-import CreateTask from "./CreateTask";
-import { useTodoList } from "../store/dataStore";
 import CreateList from "./CreateList";
 
 export default function CreateListC() {

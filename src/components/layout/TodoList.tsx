@@ -14,7 +14,9 @@ export default function TodoList({ data }: { data: ToDoListType[] }) {
     navigate(`/list/${item.id}`);
   }
 
-  console.log("todoId", todoId, typeof todoId);
+  if (todoId) {
+    return <></>;
+  }
 
   return (
     <div className="flex flex-col items-start">

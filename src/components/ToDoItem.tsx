@@ -1,12 +1,8 @@
-"use client";
 import { ToDoItemType } from "../types";
 import { TrashIcon } from "@heroicons/react/24/outline";
-// import updateTodoCompleted from "../api/api";
 import ContainerBox from "./ContainerBox";
-import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import { PencilIcon } from "@heroicons/react/24/outline";
 import { parseISO, format } from "date-fns";
-
 import { ChevronDoubleUpIcon } from "@heroicons/react/24/outline";
 import { ChevronUpIcon } from "@heroicons/react/24/outline";
 
@@ -27,16 +23,8 @@ export default function ToDoItem({
   handleDeleteToDo,
   editButtonHanler,
 }: ToDoItemProps) {
-  const {
-    id,
-    title,
-    completed,
-    todoListId,
-    deadLine,
-    createdAt,
-    tags,
-    priority,
-  } = itemData;
+  const { id, title, completed, todoListId, deadLine, tags, priority } =
+    itemData;
 
   const formatToDate = (originDate: string): string => {
     const date = parseISO(originDate);

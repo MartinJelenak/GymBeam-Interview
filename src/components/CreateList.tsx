@@ -10,16 +10,12 @@ export default function CreateList({
     initialValues: {
       listName: "",
     },
-    // validationSchema: createToDoValidationSchema,
     onSubmit: (values) => {
-      handleCreateList(
-        values.listName // Add a comma after 'listName'
-      );
+      handleCreateList(values.listName);
     },
   });
 
   return (
-    // 🐨 add a formik form here
     <form onSubmit={formik.handleSubmit} className="sticky ">
       <div className="mt-2 px-3 ">
         <input

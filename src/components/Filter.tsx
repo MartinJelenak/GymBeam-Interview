@@ -48,9 +48,8 @@ export default function Filter() {
               id="voice-search"
               className="bg-white/10 rounded-lg text-sm focus:ring-blue-500 block w-full pl-10 p-2.5"
               placeholder="Search todos"
-              value={filterByText} // Uistite sa, že hodnota je viazaná na stav
+              value={filterByText}
               onChange={(e) => {
-                // Aktualizujte stav bez zbytočného oneskorenia
                 setFilterByText(e.target.value);
               }}
               required

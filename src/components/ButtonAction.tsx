@@ -22,7 +22,6 @@ const ButtonAction: React.FC<ButtonActionProps> = ({
   const primaryStyles =
     "bg-gray-700 dark:bg-white/10  px-4 py-2 text-sm font-semibold shadow-lg text-gray-200";
   const secondaryStyles = "bg-gray-200 text-black";
-  const iconVariantStyles = "bg-none"; // update this with your styles if necessary
 
   const enabledStyles = "";
   const disabledStyles = "bg-gray-500 cursor-not-allowed opacity-50";

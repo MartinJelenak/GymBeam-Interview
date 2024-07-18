@@ -2,14 +2,12 @@
 import ContainerBox from "../ContainerBox";
 import CreateListC from "../CreateListC";
 import DarkModeToggle from "../DarkModeToggle";
-// import { useModal } from "../../store/useModalStore";
 
 interface SidebarItemProps {
   children: React.ReactNode;
 }
 
 export default function DesctopSideBar({ children }: SidebarItemProps) {
-  // const { isOpenSideBar, openSideBar, closeSideBar } = useModal();
   return (
     <div className="hidden lg:fixed overflow-auto lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col text-gray-800 dark:text-gray-200">
       <ContainerBox

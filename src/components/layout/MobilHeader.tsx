@@ -27,7 +27,6 @@ export default function MobilHeader() {
       <ButtonAction onClick={openFilter}>
         <FunnelIcon className="h-6 w-6 text-gray-500" />
       </ButtonAction>
-      {/* <DarkModeToggle /> */}
     </ContainerBox>
   );
 }

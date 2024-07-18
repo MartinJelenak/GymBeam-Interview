@@ -3,7 +3,6 @@ import { useFormik } from "formik";
 import { formatISO } from "date-fns";
 import ButtonAction from "./ButtonAction";
 import { createToDoValidationSchema } from "../schemas/CreateToDoValidationSchema";
-// import ButtonAction from "./ButtonAction";
 import ButtonsFilter from "./ButtonsFilter";
 import { useTodoList } from "../store/dataStore";
 
@@ -69,19 +68,18 @@ export default function CreateTask({
       tags: editItemData ? toDoItem.tags : [],
       priority: editItemData ? toDoItem.priority : "none",
     },
+    validationSchema: createToDoValidationSchema,
     onSubmit: (values) => {
       if (editItemData) {
-        // Volanie funkcie na úpravu existujúcej úlohy
         handleEditToDo(
           todoListId,
-          toDoItem.id, // Pridáme ID úlohy
+          toDoItem.id,
           values.title,
           new Date(values.deadLine),
           values.tags,
           values.priority
         );
       } else {
-        // Volanie funkcie na vytvorenie novej úlohy
         handleCreateToDo(
           todoListId,
           values.title,
@@ -128,7 +126,7 @@ export default function CreateTask({
             type="text"
             placeholder="Enter tags separated by commas"
             onChange={handleTagsChange}
-            value={formik.values.tags.join(", ")} // Zobrazenie tagov oddelených čiarkou
+            value={formik.values.tags.join(", ")}
             className="p-4 block w-full dark:bg-white/10 border-0 py-1.5 shadow-sm  dark:ring-zinc-700 ring-zinc-300 focus:ring-inset rounded-lg sm:text-sm sm:leading-6"
           />
         </div>

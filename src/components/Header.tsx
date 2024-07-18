@@ -1,11 +1,4 @@
 import DarkModeToggle from "./DarkModeToggle";
-// const navigationData = [
-//   { name: "About", href: "/about", active: true },
-//   { name: "Apartments", href: "/apartments", active: true },
-//   { name: "Press", href: "#", active: false },
-//   { name: "Careers", href: "#", active: false },
-//   { name: "Partners", href: "#", active: false },
-// ];
 
 export default function Header() {
   return (
