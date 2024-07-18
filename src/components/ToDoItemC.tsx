@@ -1,16 +1,13 @@
 import ToDoItem from "./ToDoItem";
-import { ToDoItemType } from "../types";
+import { ToDoItemType, TodoStatus, ToDoPriority } from "../types";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import {
-  updateTodoCompleted,
-  fetchToDoListById,
-  deleteToDo,
-  updateToDoItem,
-} from "../api/api";
+import { updateTodoCompleted, fetchToDoListById, deleteToDo } from "../api/api";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
-import { useTodoList, setToDoItem } from "../store/dataStore";
+import { useTodoList } from "../store/dataStore";
 import { useModal } from "../store/useModalStore";
+import useFilteredTodos from "../hooks/useFilterData";
+import { useFilter } from "../store/fiterStore";
 
 export default function ToDoItemC() {
   const { todoId } = useParams<{ todoId: string }>();
@@ -19,8 +16,8 @@ export default function ToDoItemC() {
   const openCreateTask = useModal((state) => state.openCreateTask);
   const setEditItemData = useTodoList((state) => state.setEditItemData);
   const queryClient = useQueryClient();
-  // const todoId = "2"; // For illustration, assuming this ID is correct
-  // console.log("todoId", todoId, typeof todoId);
+  const { filterStatus, filterPriority, filterByText } = useFilter();
+
   useEffect(() => {
     setListParamsId(todoId!);
   }, [todoId]);
@@ -35,7 +32,33 @@ export default function ToDoItemC() {
     enabled: !!todoId,
   });
 
-  console.log("getToDoList", todos);
+  const filters = {
+    filterStatus: filterStatus,
+    filterPriority: filterPriority,
+    filterByText: filterByText,
+  };
+
+  if (todosLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (todosError) {
+    return <div>Error loading todos: {todosError.message}</div>;
+  }
+
+  if (!todos || todos.length === 0) {
+    return <div>No items found.</div>;
+  }
+  if (!todos || !filters) {
+    console.error("Todos or filters are not ready.");
+    return; // Skorý návrat alebo alternatívne spracovanie
+  }
+
+  console.log("Todos provided to useFilteredTodos:", todos);
+  console.log("Filters provided to useFilteredTodos:", filters);
+  const filteredTodos = useFilteredTodos(todos.todos, filters);
+
+  console.log("filteredTodos", filteredTodos);
 
   const mutationTodoComplete = useMutation({
     mutationFn: (data: {
@@ -69,18 +92,6 @@ export default function ToDoItemC() {
     mutationDeleteToDo.mutate({ todoListId, todoId });
   };
 
-  if (todosLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (todosError) {
-    return <div>Error loading todos: {todosError.message}</div>;
-  }
-
-  if (!todos || todos.length === 0) {
-    return <div>No items found.</div>;
-  }
-
   const editButtonHanler = (item: ToDoItemType) => {
     setToDoItem(item);
     openCreateTask();
@@ -91,7 +102,7 @@ export default function ToDoItemC() {
   console.log("todos.todos", todos.todos);
   return (
     <>
-      {todos.todos.map((item: ToDoItemType) => (
+      {filteredTodos.map((item: ToDoItemType) => (
         <div key={item.id}>
           <ToDoItem
             itemData={item}

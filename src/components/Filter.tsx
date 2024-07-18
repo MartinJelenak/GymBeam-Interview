@@ -1,8 +1,35 @@
-import { FunnelIcon } from "@heroicons/react/24/outline";
-import { twMerge } from "tailwind-merge";
-import { TodoFilter } from "../types";
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
+import ButtonsFilter from "./ButtonsFilter";
+import { useFilter } from "../store/fiterStore";
+import { ToDoPriority, TodoStatus } from "../types";
+
 export default function Filter() {
+  const {
+    filterStatus,
+    filterPriority,
+    filterByText,
+    setFilterStatus,
+    setFilterPriority,
+    setFilterByText,
+  } = useFilter();
+  console.log(filterStatus, filterPriority, filterByText);
+
+  const handlePriorityClick = (level: ToDoPriority) => {
+    if (filterPriority === level) {
+      setFilterPriority("none");
+    } else {
+      setFilterPriority(level);
+    }
+  };
+
+  const handleStatusClick = (status: TodoStatus) => {
+    if (filterStatus === status) {
+      setFilterStatus("none");
+    } else {
+      setFilterStatus(status);
+    }
+  };
+
   return (
     <div className="flex flex-col gap-2 text-gray-500">
       <div className="flex items-center justify-between gap-1">
@@ -21,67 +48,65 @@ export default function Filter() {
               id="voice-search"
               className="bg-white/10 rounded-lg text-sm focus:ring-blue-500 block w-full pl-10 p-2.5"
               placeholder="Search todos"
-              // onChange={(e) => {
-              //   setTimeout(() => {
-              //     setSearchText(e.target.value);
-              //   }, 700);
-              // }}
+              value={filterByText} // Uistite sa, že hodnota je viazaná na stav
+              onChange={(e) => {
+                // Aktualizujte stav bez zbytočného oneskorenia
+                setFilterByText(e.target.value);
+              }}
               required
             />
           </div>
         </div>
       </div>
-      <div className="flex items-center justify-between gap-1">
-        <button
-          type="button"
-          className={twMerge(
-            "w-full rounded-l-lg bg-white/10  py-2 text-xs font-semibold shadow-sm "
-          )}
-        >
-          All
-        </button>
-        <button
-          type="button"
-          className={twMerge(
-            "w-full  bg-white/10  py-2 text-xs font-semibold shadow-sm "
-          )}
-        >
-          Active
-        </button>
-        <button
-          type="button"
-          className={twMerge(
-            "w-full rounded-r-lg bg-white/10 py-2 text-xs font-semibold shadow-sm "
-          )}
-        >
-          Completed
-        </button>
+      <div className="flex justify-between gap-4 w-full">
+        <div className="flex w-full  ">
+          <ButtonsFilter
+            onClick={() => handlePriorityClick("low" as ToDoPriority)}
+            isActive={filterPriority === "low"}
+            className="w-full rounded-l-lg py-2 text-xs font-semibold shadow-sm"
+          >
+            Low
+          </ButtonsFilter>
+          <ButtonsFilter
+            onClick={() => handlePriorityClick("medium" as ToDoPriority)}
+            isActive={filterPriority === "medium"}
+            className="w-full py-2 text-xs font-semibold shadow-sm"
+          >
+            Medium
+          </ButtonsFilter>
+          <ButtonsFilter
+            onClick={() => handlePriorityClick("high" as ToDoPriority)}
+            isActive={filterPriority === "high"}
+            className="w-full rounded-r-lg py-2 text-xs font-semibold shadow-sm"
+          >
+            High
+          </ButtonsFilter>
+        </div>
       </div>
-      <div className="flex items-center justify-between gap-1">
-        <button
-          type="button"
-          className={twMerge(
-            "w-full rounded-l-lg bg-white/10  py-2 text-xs font-semibold shadow-sm "
-          )}
-        >
-          All
-        </button>
-        <button
-          type="button"
-          className={twMerge(
-            "w-full  bg-white/10  py-2 text-xs font-semibold shadow-sm "
-          )}
-        >
-          Active
-        </button>
-        <button
-          type="button"
-          className={twMerge(
-            "w-full rounded-r-lg bg-white/10 py-2 text-xs font-semibold shadow-sm "
-          )}
-        >
-          Completed
-        </button>
+      <div className="flex justify-between gap-4 w-full">
+        <div className="flex w-full ">
+          <ButtonsFilter
+            onClick={() => handleStatusClick("all" as TodoStatus)}
+            isActive={filterStatus === "all"}
+            className="w-full rounded-l-lg py-2 text-xs font-semibold shadow-sm"
+          >
+            All
+          </ButtonsFilter>
+          <ButtonsFilter
+            onClick={() => handleStatusClick("active" as TodoStatus)}
+            isActive={filterStatus === "active"}
+            className="w-full py-2 text-xs font-semibold shadow-sm"
+          >
+            Active
+          </ButtonsFilter>
+          <ButtonsFilter
+            onClick={() => handleStatusClick("completed" as TodoStatus)}
+            isActive={filterStatus === "completed"}
+            className="w-full rounded-r-lg py-2 text-xs font-semibold shadow-sm"
+          >
+            Completed
+          </ButtonsFilter>
+        </div>
       </div>
     </div>
   );

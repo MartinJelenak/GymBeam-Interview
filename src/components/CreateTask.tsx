@@ -48,8 +48,9 @@ export default function CreateTask({
   useEffect(() => {
     if (editItemData) {
       setActiveButton(toDoItem.priority);
+      formik.setFieldValue("priority", toDoItem.priority);
     }
-  }, [editItemData]);
+  }, [editItemData, toDoItem.priority]);
 
   const handleTagsChange = (event: any) => {
     const { value } = event.target;

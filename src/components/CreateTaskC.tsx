@@ -65,11 +65,12 @@ export default function TodoItemContainer() {
     tags: string[],
     priority: string
   ) => {
+    const formattedDeadline = deadLine.toISOString();
     mutateEditToDo.mutate({
       todoListId,
       todoId,
       title,
-      deadLine,
+      deadLine: formattedDeadline,
       tags,
       priority,
     });

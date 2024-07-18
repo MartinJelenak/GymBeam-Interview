@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { ToDoListType, ToDoItemType } from "../types";
+import { ToDoListType, ToDoItemType, ToDoPriority } from "../types";
 
 interface TodoListProps {
   data: ToDoListType[];
@@ -33,6 +33,7 @@ export const useTodoList = create<TodoListProps>((set, get) => ({
     deadLine: "",
     createdAt: "",
     tags: [],
+    priority: ToDoPriority.None,
   },
   setData: (data: ToDoListType[]) => {
     set({ data });

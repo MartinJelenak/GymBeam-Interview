@@ -19,14 +19,16 @@ export interface ToDoListContainerProps {
   todos: ToDoListType[];
 }
 
-export enum TodoFilter {
+export enum TodoStatus {
   All = "all",
   Active = "active",
   Completed = "completed",
+  None = "none",
 }
 
 export enum ToDoPriority {
   Low = "low",
   Medium = "medium",
   High = "high",
+  None = "none",
 }

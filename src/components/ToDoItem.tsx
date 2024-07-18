@@ -40,7 +40,7 @@ export default function ToDoItem({
 
   const formatToDate = (originDate: string): string => {
     const date = parseISO(originDate);
-    return format(date, "dd.MM.yyyy HH:mm");
+    return format(date, " HH:mm dd.MM.yyyy");
   };
 
   return (
@@ -78,15 +78,19 @@ export default function ToDoItem({
                 <div className="flex flex-col">
                   <div className="flex justify-between">
                     <span>{title}</span>
-                    <span>{formatToDate(deadLine)}</span>
-                    <button
-                      type="button"
-                      className="inline-flex rounded-md  "
-                      onClick={() => handleDeleteToDo(todoListId, id)}
-                    >
-                      <span className="sr-only">Close</span>
-                      <TrashIcon className="h-5 w-5  hover:text-gray-800 focus:text-gray-200" />
-                    </button>
+                    <div>
+                      <span className="mr-4 text-xs">
+                        {formatToDate(deadLine)}
+                      </span>
+                      <button
+                        type="button"
+                        className="inline-flex rounded-md  "
+                        onClick={() => handleDeleteToDo(todoListId, id)}
+                      >
+                        <span className="sr-only">Close</span>
+                        <TrashIcon className="h-5 w-5  hover:text-gray-800 focus:text-gray-200" />
+                      </button>
+                    </div>
                   </div>
                   <div className="flex justify-between">
                     <div>

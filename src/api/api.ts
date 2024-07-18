@@ -27,7 +27,7 @@ export const createToDo = async ({
 }: {
   todoListId: string;
   title: string;
-  deadLine: String;
+  deadLine: string;
   tags: string[];
   priority: string;
 }): Promise<any> => {
@@ -68,7 +68,7 @@ export const updateToDoItem = async ({
   todoListId: string;
   todoId: string;
   title: string;
-  deadLine: Date;
+  deadLine: string;
   tags: string[];
   priority: string;
 }): Promise<any> => {
